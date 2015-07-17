@@ -18,72 +18,84 @@ Template.leaderboard.helpers({
       fields:  [
         {
           key : "title",
-          label : "Title",
+          label : "Título",
           "tmpl": Template.title
         },
         {
           key : "Description",
-          label : "Description",
+          label : "Descripción",
           cellClass : "justify"
         },
         {
           "key": "tags",
-          "label": "Tags",
+          "label": "Etiquetas",
           "tmpl": Template.tags
         },
         {
           "key": "techs",
-          "label": "Techs",
+          "label": "Technologías",
           "tmpl": Template.techs
         },
-        "Level",
-        "Type",
-        "Language",
-        "Votes",
+        {
+          "key" : "Level",
+          "label": "Nivel",
+        },
+        {
+          "key" : "Type",
+          "label": "Tipo",
+        },
+        {
+          "key" : "Language",
+          "label": "Idioma"
+        },
+        {
+          "key" : "Votes",
+          "label": "Votos"
+        },
         {
           key: 'ThumbsUp',
-          label : 'ThumbsUp',
+          label : 'Votar',
           tmpl : Template.thumbs
 
         },
         {
           key: 'Author1',
-          label : 'Author1',
+          label : 'Autor1',
           hidden : true
         },
                 {
           key: 'Author2',
-          label : 'Author2',
+          label : 'Autor2',
           hidden : true
         },
         {
           key: 'Author3',
-          label : 'Author3',
+          label : 'Autor3',
           hidden : true
         },
         {
           key: 'Author4',
-          label : 'Author4',
+          label : 'Autor4',
           hidden : true
         },
                 {
           key: 'DescAuthor1',
-          label : 'DescAuthor1',
+          label : 'DescAutor1',
           hidden : true
         },
                 {
           key: 'DescAuthor2',
-          label : 'DescAuthor2',
+          label : 'DescAutor2',
           hidden : true
         },
         {
           key: 'DescAuthor3',
-          label : 'DescAuthor3',
+          label : 'DescAutor3',
           hidden : true
         },
         {
           key: 'DescAuthor4',
-          label : 'DescAuthor4',
+          label : 'DescAutor4',
           hidden : true
         }
       ]
