@@ -9,9 +9,7 @@
   {{#if isLogged }}
     {{> loading}}
     {{> userPoints }}
-    <div class="container-fluid leaderboard">
-      {{> leaderboard}}
-    </div>
+    {{> leaderboard}}
   {{/if}}
 </body>
 
@@ -72,7 +70,9 @@
 
 <template name="leaderboard">
   {{#if isLogged }}
+    <div class="container-fluid leaderboard">
     {{> reactiveTable class="table table-bordered table-hover" settings=settings }}
+  </div>
   {{/if}}
 </template>
 
