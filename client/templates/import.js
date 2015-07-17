@@ -4,12 +4,11 @@ Template.navbar.helpers({});
 Template.navbar.events({
 
   'click #import': function(event, template) {
-    event.preventDefault(); 
-    Papa.parse(template.find('#csv-file').files[0], {
+    event.preventDefault();
+    Papa.parse( template.find('#csv-file').files[0], {
           header: true,
           delimiter : "|",
           complete: function(results) {
-              
             if (results.data.errors) {
               console.error("Something wrong with csv: ", results.data.errors);
             } else {
@@ -19,7 +18,6 @@ Template.navbar.events({
                 }
               });
             }
-              
           },
           skipEmptyLines: true
       });

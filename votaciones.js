@@ -15,7 +15,7 @@ if (Meteor.isClient) {
   Accounts.onLoginFailure(function(err){
     Session.set('displayMessage', err.reason);
   });
-  
+
   Meteor.autorun(function() {
     // Whenever this session variable changes, run this function.
     var message = Session.get('displayMessage');
@@ -30,7 +30,3 @@ if (Meteor.isClient) {
   });
 
 }
-
-
-
-

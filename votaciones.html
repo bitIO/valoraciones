@@ -1,50 +1,168 @@
 <head>
-  <title>Leaderboard</title>
+  <title>Meteor Spain - Votaciones codemotion</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-  <div class="header">
-    <div class="containerFlex">
-     <section class="flex-item-logo">
-       <img src="/logo.png" class="logo">
-     </section>
-     <section class="flex-item-title">
-        <h2>Votaciones para charlas de Codemotion</h2>
-     </section>
-     <section class="flex-item-auth">
-      {{#if isLogged }}
-        <img src="{{ avatar }}" class="avatar" alt="You">
-      {{/if}}
-      {{> loginButtons}} 
-     </section>
-     
+  {{> navbar}}
+  {{> instrucciones}}
+  {{#if isLogged }}
+    {{> loading}}
+    {{> userPoints }}
+    <div class="container-fluid leaderboard">
+      {{> leaderboard}}
     </div>
-  </div>
-  <div class="container-fluid">
-    {{> leaderboard}}
-  </div>
+  {{/if}}
 </body>
 
 <template name="navbar">
+  <div class="navbar navbar-inverse" role="navigation">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img src="./logo-meteorspain.jpeg" alt="" />
+          </a>
+
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+      </div>
+
+      <p class="navbar-text">
+        Votaciones charla codemotion
+      </p>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          {{#if isLogged }}
+          <li><img src="{{ avatar }}" class="avatar img-circle" alt="You"></li>
+          {{/if}}
+          {{> loginButtons}} <!-- here -->
+        </ul>
+      </div>
+  </div>
+</template>
+
+<template name="_loginButtonsAdditionalLoggedInDropdownActions">
+  {{#if notImportedYet}}
+  <div class="well">
+    <p class="text-info">
+      Selecciona el archivo en formato CSV a importar
+    </p>
+    {{> import}}
+  </div>
+  {{else}}
+  <div class="well well-sm text-info text-center">
+      El fichero de charlas ya se ha importado.
+  </div>
+  {{/if}}
+
+</template>
+
+<template name="import">
   {{# if isAdmin }}
-    <section class="admin">
-      {{#if notImportedYet}}
-        <input type="file" id="csv-file" name="files"/>
-        <button type="submit" id="import" class="btn-small">Import Talks</button>
-      {{/if}}
-    </section>
-  {{/if}}     
+    <input type="file" id="csv-file" name="files"/>
+    <button type="submit" id="import" class="btn btn-block btn-danger">
+      <i class="fa fa-file"></i> Import Talks
+    </button>
+  {{/if}}
 </template>
 
 <template name="leaderboard">
-   {{#if isLogged }}
-    {{> navbar}}
+  {{#if isLogged }}
     {{> reactiveTable class="table table-bordered table-hover" settings=settings }}
-   {{/if}}
+  {{/if}}
 </template>
 
-<template name="thumbsUp">
-  <span><i class="increment fa fa-thumbs-o-up fa-3x"></i></span>
+<template name="loading">
+  <div class="col-12" id="loading">
+    <p class="text-center">
+      <i class="fa fa-spinner fa-spin fa-4x"></i><br/><br/>
+      Cargando charlas ...
+    </p>
+  </div>
 </template>
 
+<template name="thumbs">
+  <div class="container-fluid thumbs-container">
+    {{#unless isMax}}
+    <div class="col-sm-12 col-md-6">
+      <i class="increment fa fa-thumbs-o-up fa-3x" style="{{#if canRemoveVotes}}color:green{{/if}}"></i>
+    </div>
+    {{/unless}}
+
+    {{#unless isMin}}
+    {{#if canRemoveVotes}}
+    <div class="col-sm-12 col-md-6">
+      <i class="decrease fa fa-thumbs-o-down fa-3x" style="color: red"></i>
+    </div>
+    {{/if}}
+    {{/unless}}
+  </div>
+</template>
+
+<template name="title">
+  <div>{{this.Title}}</div>
+  {{#if affinity}}
+  <div>
+    <i class="fa fa-check-circle" style="color:green; cursor:help" title="Af&iacute;n a nuestro meetup"></i>
+  </div>
+  {{/if}}
+</template>
+
+<template name="tags">
+  {{#each tags}} {{> _label }} {{/each}}
+</template>
+
+<template name="techs">
+  {{#each techs}} {{> _label}} {{/each}}
+</template>
+
+<template name="_label">
+  {{#if isJavascriptRelated this}}
+    <span class="label label-success">{{this}}</span>
+  {{else}}
+    <span class="label label-info">{{this}}</span>
+  {{/if}}
+</template>
+
+<template name="userPoints">
+  <div class="col-sm-4 user-points">
+    Te quedan <strong>{{remainingPoints}}</strong> puntos por asignar
+  </div>
+</template>
+
+<template name="instrucciones">
+
+  <div class="container-fluid" id="instrucciones">
+    <div class="well well-sm">
+      <span class="close" aria-hidden="true">&times;</span>
+      <h4>Instrucciones</h4>
+      {{#if isLogged }}
+      <ul>
+        <li>
+            Tienes 100 puntos para votar
+            <small>
+              <ul>
+                <li>No tienes que gastarlos todos</li>
+                <li>Puedes ver los que te quedan encima de la tabla</li>
+              </ul>
+            </small>
+        </li>
+        <li>
+          Un click en el <em>thum up</em> da 5 puntos.
+          Un en el <em>thumb down</em> los quita.
+        </li>
+      </ul>
+      {{ else }}
+      <h5>
+        Tienes que logarte con tu cuenta de Meetup primero. Si no, no hay nada
+        qu&eacute; hacer <i class="fa fa-smile-o"></i>
+      </h5>
+      {{/if}}
+    </div>
+  </div>
+
+</template>

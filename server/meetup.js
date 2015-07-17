@@ -1,9 +1,20 @@
-community = "HTML5-Spain";
-Accounts.onCreateUser(function(options, user){      
-  var accessToken = user.services.meetup.accessToken;
+/*
+ * Change this to your community
+ */
+community = "Meteor-Spain";
+if ( !community ) {
+  throw new Meteor.Error(500, "Meetup Community has to be defined");
+}
+var adminRoles = ["Organizer","Assistant Organizer","Co-Organizer",
+  "Event Organizer" ];
+// ========================================================================== //
+
+Accounts.onCreateUser(function(options, user){
+  var result, accessToken = user.services.meetup.accessToken;
   try {
-    var result =   
-      Meteor.http.get('https://api.meetup.com/2/profiles.json/?member_id=' + user.services.meetup.id,{
+    result =
+      Meteor.http.get('https://api.meetup.com/2/profiles.json/?member_id=' +
+        user.services.meetup.id, {
         headers: {
           "User-Agent": "Meteor/1.0",
           "Authorization" : "Bearer " + accessToken
@@ -13,32 +24,23 @@ Accounts.onCreateUser(function(options, user){
     throw error;
   }
 
-  debugger;
-  var profile = 
-    result.data.results
-      .filter(function (prof) { 
-        return prof.group.urlname === community; 
+  var profile = result.data.results
+      .filter(function (prof) {
+        return prof.group.urlname === community;
       })
-      .map(function (prof) { 
+      .map(function (prof) {
         return {
           name : prof.name,
           photo : prof.photo_url,
-          role : _.contains(["Organizer","Assistant Organizer","Co-Organizer","Event Organizer"],prof.role) ? "admin" : "member"
+          role : _.contains(adminRoles, prof.role) ? "admin" : "member",
+          points: 100
         };
       })[0];
 
   if (profile) {
-    
     user.profile = profile;
     return user;
   } else {
-    throw new Meteor.Error(503, 
-      "The user has to belong to Meetup Community");
-    return false;
+    throw new Meteor.Error(503, "The user has to belong to Meetup Community");
   }
-  
-
 });
-
-
-

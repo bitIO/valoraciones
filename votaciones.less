@@ -1,5 +1,6 @@
 body div.header {
-  background-color: #eeeeee;
+  background-color: #000000;
+  color: #fff;
 }
 
 .speaker {
@@ -10,8 +11,30 @@ body div.header {
   }
 }
 
-.justify {
-  text-align: justify;
+.reactive-table {
+  tr {
+    max-height: 100px;
+
+    .justify {
+      text-align: justify;
+      overflow-y: scroll;
+    }
+  }
+
+
+}
+.ThumbsUp {
+  .thumbs-container {
+    padding: 0px;
+    div {
+      padding: 0px;
+      i {
+        cursor: pointer;
+      }
+    }
+  }
+  padding: 0px !important;
+  vertical-align: middle !important;
 }
 
 
@@ -31,16 +54,11 @@ body div.header {
   overflow-y: scroll;
   padding-bottom: 1em;
 }
-.avatar {
-  border-radius: 50%;
-  width: 4em;
-  height: 4em;
-}
 .containerFlex {
   display: flex;
   padding: 0.5em 0;
   align-items: center;
-  
+
 }
 .flex-item-logo {
    flex: 3;
@@ -56,9 +74,33 @@ body div.header {
   padding-right: 1em;
 }
 .container-fluid {
-  padding-top: 0.5em;
+  > .leaderboard {
+    display: none;
+    padding-top: 0.5em;
+  }
 }
 .logo {
   height: 4em;
 }
 
+.navbar {
+  background-color: #000;
+
+  img.avatar {
+    width: 4em;
+    height: 4em;
+  }
+
+  .navbar-brand {
+    padding: 0px;
+    img {
+      height: 50px;
+    }
+  }
+  .navbar-text {
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
+}
