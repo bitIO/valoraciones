@@ -20,37 +20,41 @@ Template.leaderboard.helpers({
         {
           key : "title",
           label : "Título",
-          "tmpl": Template.title
+          tmpl: Template.title,
         },
         {
           key : "Description",
           label : "Descripción",
-          cellClass : "justify"
+          tmpl: Template.description,
         },
         {
-          "key": "tags",
-          "label": "Etiquetas",
-          "tmpl": Template.tags
+          key: "tags",
+          label: "Etiquetas",
+          tmpl: Template.tags
         },
         {
-          "key": "techs",
-          "label": "Technologías",
-          "tmpl": Template.techs
+          key: "techs",
+          label: "Technologías",
+          tmpl: Template.techs,
+          hidden : true
         },
         {
-          "key" : "Level",
-          "label": "Nivel",
+          key : "Level",
+          label: "Nivel",
+          hidden : true
         },
         {
-          "key" : "Type",
-          "label": "Tipo",
+          key : "Type",
+          label: "Tipo",
+          hidden : true
         },
         {
-          "key" : "Language",
-          "label": "Idioma"
+          key : "Language",
+          label: "Idioma",
+          hidden : true
         },
         {
-          "key" : "Votes",
+          key : "Votes",
           "label": "Votos"
         },
         {

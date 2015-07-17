@@ -12,6 +12,11 @@ body div.header {
 }
 
 .reactive-table {
+
+  th.title {
+    min-width: 150px;
+  }
+
   tr {
     max-height: 100px;
 
@@ -23,15 +28,25 @@ body div.header {
 
 
 }
+
+.talk-description {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
 .ThumbsUp {
   .thumbs-container {
+
     padding: 0px;
+    min-width: 75px;
+
     div {
       padding: 0px;
       i {
         cursor: pointer;
       }
     }
+
   }
   padding: 0px !important;
   vertical-align: middle !important;
@@ -45,20 +60,19 @@ body div.header {
   max-height: 1000px;
   overflow-y: scroll;
   border-bottom: 1em solid skyblue;
-
-
 }
+
 .item[data-selected="false"] {
   max-height: 100px;
   flex-grow: 1;
   overflow-y: scroll;
   padding-bottom: 1em;
 }
+
 .containerFlex {
   display: flex;
   padding: 0.5em 0;
   align-items: center;
-
 }
 .flex-item-logo {
    flex: 3;

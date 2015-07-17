@@ -28,7 +28,10 @@
       </div>
 
       <p class="navbar-text">
-        Votaciones charla codemotion
+        Votaci&oacute;n charlas propuestas 
+        <a href="http://2015.codemotion.es/" target="_blank">
+          Codemotion 2015
+        </a>
       </p>
 
       <div class="navbar-collapse collapse">
@@ -112,6 +115,10 @@
   {{/if}}
 </template>
 
+<template name="description">
+  <div class="talk-description">{{ Description }}</div>
+</template>
+
 <template name="tags">
   {{#each tags}} {{> _label }} {{/each}}
 </template>
@@ -144,7 +151,7 @@
 
   <div class="container-fluid" id="instrucciones">
     <div class="well well-sm">
-      <span class="close" aria-hidden="true">&times;</span>
+      <span class="close" aria-hidden="true" style="color:red">&times;</span>
       <h4><i class="fa fa-info-circle"></i> Instrucciones</h4>
       {{#if isLogged }}
       <ul>
@@ -166,6 +173,13 @@
         </li>
         <li class="text-warning">
           S&oacute;lo puedes quitar aquellos puntos que hayas dado
+        </li>
+        <li>
+          Para ver más detalles de las charlas, puedes seleccionar las columnas
+          a mostrar en el bot&oacute;n <em>Columns</em> junto al filtro
+        </li>
+        <li>Tambi&eacute;n puedes buscar en el campo <em>Filter</em>.
+          Hace magia <i class="fa fa-magic"></i>!
         </li>
       </ul>
       {{ else }}
