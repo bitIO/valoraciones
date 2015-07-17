@@ -10,6 +10,7 @@ Template.leaderboard.events({
 
 Template.leaderboard.helpers({
   "settings" : function() {
+
     return {
       collection : Talks,
       rowsPerPage : 5,
@@ -97,9 +98,15 @@ Template.leaderboard.helpers({
           key: 'DescAuthor4',
           label : 'DescAutor4',
           hidden : true
+        },
+        {
+          key: 'affinity',
+          label : 'Afinidad?',
+          hidden : true
         }
-      ]
-
+      ],
+      filters: ['affinity'],
+      multiColumnSort : true
     };
   }
 });
@@ -110,6 +117,7 @@ Template.leaderboard.created = function () {
      subscription = this.subscribe("talks", function() {
        $("#loading").css("display", "none");
        $(".container-fluid.leaderboard").css("display", "block");
+       $('#affinityToggle').bootstrapToggle('on')
      });
    }
 };

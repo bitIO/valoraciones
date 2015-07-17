@@ -8,7 +8,6 @@
   {{> instrucciones}}
   {{#if isLogged }}
     {{> loading}}
-    {{> userPoints }}
     {{> leaderboard}}
   {{/if}}
 </body>
@@ -71,6 +70,7 @@
 <template name="leaderboard">
   {{#if isLogged }}
     <div class="container-fluid leaderboard">
+    {{> userPoints }}
     {{> reactiveTable class="table table-bordered table-hover" settings=settings }}
   </div>
   {{/if}}
@@ -129,8 +129,14 @@
 </template>
 
 <template name="userPoints">
-  <div class="col-sm-4 user-points">
+  <div class="col-sm-12 text-center well well-small">
     Te quedan <strong>{{remainingPoints}}</strong> puntos por asignar
+  </div>
+  <div class="col-sm-3 user-points">
+    <input type="checkbox" id="affinityToggle"
+      data-on="S&oacute;lo charlas afines" data-off="Todas las charlas"
+      data-onstyle="success" data-offstyle="default"
+      data-width="100%" data-height="25">
   </div>
 </template>
 
@@ -139,7 +145,7 @@
   <div class="container-fluid" id="instrucciones">
     <div class="well well-sm">
       <span class="close" aria-hidden="true">&times;</span>
-      <h4>Instrucciones</h4>
+      <h4><i class="fa fa-info-circle"></i> Instrucciones</h4>
       {{#if isLogged }}
       <ul>
         <li>
@@ -152,8 +158,14 @@
             </small>
         </li>
         <li>
-          Un click en el <em>thum up</em> da 5 puntos.
+          Un click en el <em>thumb up</em> da 5 puntos.
           Un en el <em>thumb down</em> los quita.
+        </li>
+        <li class="text-success">
+          Puedes votar a una sola charla todas las veces que quieras
+        </li>
+        <li class="text-warning">
+          S&oacute;lo puedes quitar aquellos puntos que hayas dado
         </li>
       </ul>
       {{ else }}
