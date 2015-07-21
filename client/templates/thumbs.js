@@ -62,7 +62,10 @@ Template.thumbs.events({
 
 Template.thumbs.helpers({
   "isMin" : function () { return this.Votes <= 0; },
-  "isMax" : function () { return this.Votes >= 100; },
+  "noPointsRemaining" : function () {
+    console.log("user points", Meteor.user().profile.points);
+    return Meteor.user().profile.points <= 0;
+  },
   "canRemoveVotes": function() {
     // only allow remove points the user has given
     return _.indexOf( this.Who, Meteor.userId() ) != -1;
